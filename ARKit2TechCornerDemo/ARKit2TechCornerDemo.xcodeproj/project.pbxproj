@@ -13,6 +13,9 @@
 		0ED790032168E1D400D05723 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0ED790012168E1D400D05723 /* Main.storyboard */; };
 		0ED790052168E1D600D05723 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0ED790042168E1D600D05723 /* Assets.xcassets */; };
 		0ED790082168E1D600D05723 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0ED790062168E1D600D05723 /* LaunchScreen.storyboard */; };
+		0ED79011216D6D0500D05723 /* StatusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED79010216D6D0500D05723 /* StatusViewController.swift */; };
+		0ED79013216D6D2A00D05723 /* ImageTrackingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED79012216D6D2A00D05723 /* ImageTrackingViewController.swift */; };
+		0ED79015216D6D8700D05723 /* ImageTrackingViewController+ARSessionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED79014216D6D8700D05723 /* ImageTrackingViewController+ARSessionDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +27,9 @@
 		0ED790042168E1D600D05723 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0ED790072168E1D600D05723 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0ED790092168E1D600D05723 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0ED79010216D6D0500D05723 /* StatusViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusViewController.swift; sourceTree = "<group>"; };
+		0ED79012216D6D2A00D05723 /* ImageTrackingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageTrackingViewController.swift; sourceTree = "<group>"; };
+		0ED79014216D6D8700D05723 /* ImageTrackingViewController+ARSessionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ImageTrackingViewController+ARSessionDelegate.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +62,7 @@
 		0ED78FFA2168E1D400D05723 /* ARKit2TechCornerDemo */ = {
 			isa = PBXGroup;
 			children = (
+				0ED7900F216D6C9200D05723 /* ARImageTracking */,
 				0ED78FFB2168E1D400D05723 /* AppDelegate.swift */,
 				0ED78FFD2168E1D400D05723 /* art.scnassets */,
 				0ED78FFF2168E1D400D05723 /* ViewController.swift */,
@@ -65,6 +72,16 @@
 				0ED790092168E1D600D05723 /* Info.plist */,
 			);
 			path = ARKit2TechCornerDemo;
+			sourceTree = "<group>";
+		};
+		0ED7900F216D6C9200D05723 /* ARImageTracking */ = {
+			isa = PBXGroup;
+			children = (
+				0ED79010216D6D0500D05723 /* StatusViewController.swift */,
+				0ED79012216D6D2A00D05723 /* ImageTrackingViewController.swift */,
+				0ED79014216D6D8700D05723 /* ImageTrackingViewController+ARSessionDelegate.swift */,
+			);
+			path = ARImageTracking;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -140,7 +157,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				0ED790002168E1D400D05723 /* ViewController.swift in Sources */,
+				0ED79011216D6D0500D05723 /* StatusViewController.swift in Sources */,
 				0ED78FFC2168E1D400D05723 /* AppDelegate.swift in Sources */,
+				0ED79013216D6D2A00D05723 /* ImageTrackingViewController.swift in Sources */,
+				0ED79015216D6D8700D05723 /* ImageTrackingViewController+ARSessionDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
