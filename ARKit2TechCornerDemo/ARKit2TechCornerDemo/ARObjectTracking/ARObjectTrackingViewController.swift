@@ -25,7 +25,7 @@ class ARObjectTrackingViewController: UIViewController, ARSCNViewDelegate
     sceneView.showsStatistics = true
 
     // Create a new scene
-    let scene = SCNScene(named: "art.scnassets/ship.scn")!
+    //let scene = SCNScene(named: "art.scnassets/ship.scn")!
 
     // Set the scene to the view
     //sceneView.scene = scene
@@ -37,6 +37,11 @@ class ARObjectTrackingViewController: UIViewController, ARSCNViewDelegate
 
     // Create a session configuration
     let configuration = ARWorldTrackingConfiguration()
+
+    guard let referenceObjects = ARReferenceObject.referenceObjects(inGroupNamed: "AR Resources Objects", bundle: nil) else {
+      fatalError("Missing expected asset catalog resources.")
+    }
+    configuration.detectionObjects = referenceObjects
 
     // Run the view's session
     sceneView.session.run(configuration)
@@ -52,14 +57,18 @@ class ARObjectTrackingViewController: UIViewController, ARSCNViewDelegate
 
   // MARK: - ARSCNViewDelegate
 
-  /*
-   // Override to create and configure nodes for anchors added to the view's session.
-   func renderer(_ renderer: SCNSceneRenderer, nodeFor anchor: ARAnchor) -> SCNNode? {
-   let node = SCNNode()
 
-   return node
-   }
-   */
+  // Override to create and configure nodes for anchors added to the view's session.
+  func renderer(_ renderer: SCNSceneRenderer, nodeFor anchor: ARAnchor) -> SCNNode?
+  {
+    let node = SCNNode()
+    if let objAnchor = anchor as? ARObjectAnchor
+    {
+      print("Anchor name is \(objAnchor.referenceObject.name)")
+    }
+
+    return node
+  }
 
   func session(_ session: ARSession, didFailWithError error: Error)
   {
@@ -74,5 +83,14 @@ class ARObjectTrackingViewController: UIViewController, ARSCNViewDelegate
   func sessionInterruptionEnded(_ session: ARSession)
   {
     // Reset tracking and/or remove existing anchors if consistent tracking is required
+  }
+
+  func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor)
+  {
+    if let objectAnchor = anchor as? ARObjectAnchor
+    {
+      //node.addChildNode(self.model)
+      print("Object detected! \(objectAnchor.description)")
+    }
   }
 }
