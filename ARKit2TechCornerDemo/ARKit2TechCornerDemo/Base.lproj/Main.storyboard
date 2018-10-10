@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="w24-YR-LN0">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="h6S-AM-CCw">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -9,10 +9,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Object Tracking View Controller-->
         <scene sceneID="tXr-a1-R10">
             <objects>
-                <viewController id="BV1-FR-VrT" customClass="ViewController" customModule="ARKit2TechCornerDemo" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BV1-FR-VrT" customClass="ARObjectTrackingViewController" customModule="ARKit2TechCornerDemo" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="U0K-SW-4ec">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -36,21 +36,61 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="-76" y="1061"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="4Ez-tj-ZOr">
+            <objects>
+                <navigationController id="h6S-AM-CCw" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="OOe-UV-FUv">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="Dd0-sL-MhO" kind="relationship" relationship="rootViewController" id="LjC-zb-aNb"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="v1d-su-Aza" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2114" y="505"/>
         </scene>
         <!--View Controller-->
-        <scene sceneID="Cd9-E8-u88">
+        <scene sceneID="fDx-tx-AEk">
             <objects>
-                <viewController id="bV0-kZ-1ec" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="DLi-nT-Oe1">
+                <viewController id="Dd0-sL-MhO" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ZVa-Si-0fA">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dfy-LT-HC0">
+                                <rect key="frame" x="135.5" y="483" width="104" height="30"/>
+                                <state key="normal" title="ObjectTracking"/>
+                                <connections>
+                                    <segue destination="BV1-FR-VrT" kind="show" id="fNw-6V-ZPU"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LFd-k2-ouR">
+                                <rect key="frame" x="137.5" y="128" width="100" height="30"/>
+                                <state key="normal" title="ImageTracking"/>
+                                <connections>
+                                    <segue destination="w24-YR-LN0" kind="show" id="4nu-2d-1Wq"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <viewLayoutGuide key="safeArea" id="9nT-cl-M0P"/>
+                        <constraints>
+                            <constraint firstItem="LFd-k2-ouR" firstAttribute="centerX" secondItem="ZVa-Si-0fA" secondAttribute="centerX" id="ETc-zQ-NTj"/>
+                            <constraint firstItem="Dfy-LT-HC0" firstAttribute="centerX" secondItem="ZVa-Si-0fA" secondAttribute="centerX" id="O1c-X8-tOe"/>
+                            <constraint firstItem="33d-f3-tx3" firstAttribute="bottom" secondItem="Dfy-LT-HC0" secondAttribute="bottom" multiplier="1.3" id="jPK-hi-ipr"/>
+                            <constraint firstItem="LFd-k2-ouR" firstAttribute="top" secondItem="33d-f3-tx3" secondAttribute="top" multiplier="2" id="sLz-q2-ZHF"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="33d-f3-tx3"/>
                     </view>
+                    <navigationItem key="navigationItem" id="ZiO-eF-GrJ"/>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Wwl-nH-omj" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ooy-e0-3sU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1721" y="134"/>
+            <point key="canvasLocation" x="-1351" y="504"/>
         </scene>
         <!--Image Tracking View Controller-->
         <scene sceneID="QCI-69-TOB">
@@ -84,7 +124,7 @@
                                 <blurEffect style="light"/>
                             </visualEffectView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bDT-26-PCa">
-                                <rect key="frame" x="0.0" y="20" width="375" height="85"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="85"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="85" id="nJW-ii-SmV"/>
                                 </constraints>
@@ -121,7 +161,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bPG-d4-Qrz" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-698" y="90"/>
+            <point key="canvasLocation" x="-334" y="72"/>
         </scene>
         <!--Status View Controller-->
         <scene sceneID="Id5-oE-u1A">

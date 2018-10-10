@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		0ED78FFC2168E1D400D05723 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED78FFB2168E1D400D05723 /* AppDelegate.swift */; };
 		0ED78FFE2168E1D400D05723 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 0ED78FFD2168E1D400D05723 /* art.scnassets */; };
-		0ED790002168E1D400D05723 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED78FFF2168E1D400D05723 /* ViewController.swift */; };
+		0ED790002168E1D400D05723 /* ARObjectTrackingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED78FFF2168E1D400D05723 /* ARObjectTrackingViewController.swift */; };
 		0ED790032168E1D400D05723 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0ED790012168E1D400D05723 /* Main.storyboard */; };
 		0ED790052168E1D600D05723 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0ED790042168E1D600D05723 /* Assets.xcassets */; };
 		0ED790082168E1D600D05723 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0ED790062168E1D600D05723 /* LaunchScreen.storyboard */; };
@@ -22,7 +22,7 @@
 		0ED78FF82168E1D400D05723 /* ARKit2TechCornerDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ARKit2TechCornerDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0ED78FFB2168E1D400D05723 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0ED78FFD2168E1D400D05723 /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
-		0ED78FFF2168E1D400D05723 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		0ED78FFF2168E1D400D05723 /* ARObjectTrackingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARObjectTrackingViewController.swift; sourceTree = "<group>"; };
 		0ED790022168E1D400D05723 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		0ED790042168E1D600D05723 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0ED790072168E1D600D05723 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -62,10 +62,10 @@
 		0ED78FFA2168E1D400D05723 /* ARKit2TechCornerDemo */ = {
 			isa = PBXGroup;
 			children = (
+				0ED79016216E858900D05723 /* ARObjectTracking */,
 				0ED7900F216D6C9200D05723 /* ARImageTracking */,
 				0ED78FFB2168E1D400D05723 /* AppDelegate.swift */,
 				0ED78FFD2168E1D400D05723 /* art.scnassets */,
-				0ED78FFF2168E1D400D05723 /* ViewController.swift */,
 				0ED790012168E1D400D05723 /* Main.storyboard */,
 				0ED790042168E1D600D05723 /* Assets.xcassets */,
 				0ED790062168E1D600D05723 /* LaunchScreen.storyboard */,
@@ -82,6 +82,14 @@
 				0ED79014216D6D8700D05723 /* ImageTrackingViewController+ARSessionDelegate.swift */,
 			);
 			path = ARImageTracking;
+			sourceTree = "<group>";
+		};
+		0ED79016216E858900D05723 /* ARObjectTracking */ = {
+			isa = PBXGroup;
+			children = (
+				0ED78FFF2168E1D400D05723 /* ARObjectTrackingViewController.swift */,
+			);
+			path = ARObjectTracking;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -156,7 +164,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0ED790002168E1D400D05723 /* ViewController.swift in Sources */,
+				0ED790002168E1D400D05723 /* ARObjectTrackingViewController.swift in Sources */,
 				0ED79011216D6D0500D05723 /* StatusViewController.swift in Sources */,
 				0ED78FFC2168E1D400D05723 /* AppDelegate.swift in Sources */,
 				0ED79013216D6D2A00D05723 /* ImageTrackingViewController.swift in Sources */,
