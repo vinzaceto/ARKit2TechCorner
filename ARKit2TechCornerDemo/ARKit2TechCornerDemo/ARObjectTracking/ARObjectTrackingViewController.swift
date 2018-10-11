@@ -13,7 +13,8 @@ import ARKit
 class ARObjectTrackingViewController: UIViewController, ARSCNViewDelegate
 {
   @IBOutlet var sceneView: ARSCNView!
-
+  @IBOutlet weak var ObjectIdentity: UILabel!
+  
   override func viewDidLoad()
   {
     super.viewDidLoad()
@@ -64,7 +65,11 @@ class ARObjectTrackingViewController: UIViewController, ARSCNViewDelegate
     let node = SCNNode()
     if let objAnchor = anchor as? ARObjectAnchor
     {
-      print("Anchor name is \(objAnchor.referenceObject.name)")
+      print("Anchor name is \(objAnchor.referenceObject.name ?? "not available")")
+      DispatchQueue.main.async {
+        self.ObjectIdentity.text = objAnchor.referenceObject.name
+      }
+      
     }
 
     return node
