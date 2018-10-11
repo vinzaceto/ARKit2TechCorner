@@ -15,6 +15,16 @@ class ARObjectTrackingViewController: UIViewController, ARSCNViewDelegate
   @IBOutlet var sceneView: ARSCNView!
   @IBOutlet weak var ObjectIdentity: UILabel!
   
+  let fightClubVideoPlayer: AVPlayer = {
+    //load Prague video from bundle
+    guard let url = Bundle.main.url(forResource: "fight club video", withExtension: "mov", subdirectory: "art.scnassets") else {
+      print("Could not find video file")
+      return AVPlayer()
+    }
+    
+    return AVPlayer(url: url)
+  }()
+  
   override func viewDidLoad()
   {
     super.viewDidLoad()
@@ -65,6 +75,24 @@ class ARObjectTrackingViewController: UIViewController, ARSCNViewDelegate
     let node = SCNNode()
     if let objAnchor = anchor as? ARObjectAnchor
     {
+      
+      // Create a plane
+      let plane = SCNPlane(width: 0.2,
+                           height: 0.5)
+     
+     plane.firstMaterial?.diffuse.contents = self.fightClubVideoPlayer
+     fightClubVideoPlayer.play()
+     fightClubVideoPlayer.volume = 0.4
+      
+      let planeNode = SCNNode(geometry: plane)
+      
+      // Rotate the plane to match the anchor
+      //planeNode.eulerAngles.x = -.pi / 2
+      
+      planeNode.position = SCNVector3(planeNode.position.x, planeNode.position.y + 0.3, planeNode.position.z )
+      
+      // Add plane node to parent
+      node.addChildNode(planeNode)
       print("Anchor name is \(objAnchor.referenceObject.name ?? "not available")")
       DispatchQueue.main.async {
         self.ObjectIdentity.text = objAnchor.referenceObject.name
