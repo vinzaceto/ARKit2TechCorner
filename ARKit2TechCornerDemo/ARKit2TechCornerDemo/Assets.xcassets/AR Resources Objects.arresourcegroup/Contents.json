@@ -5,13 +5,22 @@
   },
   "resources" : [
     {
+      "filename" : "C_scan.arobject"
+    },
+    {
       "filename" : "CaptainAmerica.arobject"
     },
     {
       "filename" : "CaptainAmerica2.arobject"
     },
     {
+      "filename" : "M_scan.arobject"
+    },
+    {
       "filename" : "StarkMoleskine.arobject"
+    },
+    {
+      "filename" : "T_scan.arobject"
     }
   ]
 }
