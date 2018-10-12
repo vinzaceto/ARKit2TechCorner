@@ -34,6 +34,8 @@ class ARObjectTrackingViewController: UIViewController, ARSCNViewDelegate
 
     // Show statistics such as fps and timing information
     sceneView.showsStatistics = true
+    
+    sceneView.scene.lightingEnvironment.intensity = 4
 
     // Create a new scene
     //let scene = SCNScene(named: "art.scnassets/ship.scn")!
@@ -75,7 +77,6 @@ class ARObjectTrackingViewController: UIViewController, ARSCNViewDelegate
     let node = SCNNode()
     if let objAnchor = anchor as? ARObjectAnchor
     {
-      
       if objAnchor.referenceObject.name == "StarkMoleskine"
       {
         // Create a plane
@@ -95,10 +96,15 @@ class ARObjectTrackingViewController: UIViewController, ARSCNViewDelegate
         
         // Add plane node to parent
         node.addChildNode(planeNode)
-      }    
+      }
+      else if objAnchor.referenceObject.name == "M_scan"
+      {
+        let lettersScene = SCNScene(named: "art.scnassets/TextDemo.scn")!
+        let textNode = lettersScene.rootNode.childNode(withName: "example_text", recursively: true)!
+        node.addChildNode(textNode)
+      }
       
-      
-      print("Anchor name is \(objAnchor.referenceObject.name ?? "not available")")
+      print("Anchor name is \(objAnchor.referenceObject.name ?? "not available")")  
       DispatchQueue.main.async {
         self.ObjectIdentity.text = objAnchor.referenceObject.name
       }
