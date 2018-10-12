@@ -76,23 +76,28 @@ class ARObjectTrackingViewController: UIViewController, ARSCNViewDelegate
     if let objAnchor = anchor as? ARObjectAnchor
     {
       
-      // Create a plane
-      let plane = SCNPlane(width: 0.2,
-                           height: 0.5)
-     
-     plane.firstMaterial?.diffuse.contents = self.fightClubVideoPlayer
-     fightClubVideoPlayer.play()
-     fightClubVideoPlayer.volume = 0.4
+      if objAnchor.referenceObject.name == "StarkMoleskine"
+      {
+        // Create a plane
+        let plane = SCNPlane(width: 0.2,
+                             height: 0.5)
+        
+        plane.firstMaterial?.diffuse.contents = self.fightClubVideoPlayer
+        fightClubVideoPlayer.play()
+        fightClubVideoPlayer.volume = 0.4
+        
+        let planeNode = SCNNode(geometry: plane)
+        
+        // Rotate the plane to match the anchor
+        //planeNode.eulerAngles.x = -.pi / 2
+        
+        planeNode.position = SCNVector3(planeNode.position.x, planeNode.position.y + 0.3, planeNode.position.z )
+        
+        // Add plane node to parent
+        node.addChildNode(planeNode)
+      }    
       
-      let planeNode = SCNNode(geometry: plane)
       
-      // Rotate the plane to match the anchor
-      //planeNode.eulerAngles.x = -.pi / 2
-      
-      planeNode.position = SCNVector3(planeNode.position.x, planeNode.position.y + 0.3, planeNode.position.z )
-      
-      // Add plane node to parent
-      node.addChildNode(planeNode)
       print("Anchor name is \(objAnchor.referenceObject.name ?? "not available")")
       DispatchQueue.main.async {
         self.ObjectIdentity.text = objAnchor.referenceObject.name
