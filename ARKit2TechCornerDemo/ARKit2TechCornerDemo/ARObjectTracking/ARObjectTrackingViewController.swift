@@ -34,14 +34,20 @@ class ARObjectTrackingViewController: UIViewController, ARSCNViewDelegate
 
     // Show statistics such as fps and timing information
     sceneView.showsStatistics = true
-    
-    sceneView.scene.lightingEnvironment.intensity = 4
 
     // Create a new scene
     //let scene = SCNScene(named: "art.scnassets/ship.scn")!
 
     // Set the scene to the view
     //sceneView.scene = scene
+    
+    configureLightning()
+  }
+  
+  func configureLightning()
+  {
+    sceneView.autoenablesDefaultLighting = true
+    sceneView.automaticallyUpdatesLighting = true
   }
 
   override func viewWillAppear(_ animated: Bool)
