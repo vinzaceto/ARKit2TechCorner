@@ -5,7 +5,13 @@
   },
   "resources" : [
     {
+      "filename" : "enel_x_id.arreferenceimage"
+    },
+    {
       "filename" : "fight club image.arreferenceimage"
+    },
+    {
+      "filename" : "Ho_id.arreferenceimage"
     },
     {
       "filename" : "homer image.arreferenceimage"
@@ -14,7 +20,13 @@
       "filename" : "isa image.arreferenceimage"
     },
     {
+      "filename" : "pirelli_id.arreferenceimage"
+    },
+    {
       "filename" : "prague image.arreferenceimage"
+    },
+    {
+      "filename" : "sky_id.arreferenceimage"
     }
   ]
 }

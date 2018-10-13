@@ -138,7 +138,7 @@ class ImageTrackingViewController: UIViewController, ARSCNViewDelegate
       let plane = SCNPlane(width: imageAnchor.referenceImage.physicalSize.width, height: imageAnchor.referenceImage.physicalSize.height)
       //addVideoFromReferenceImage(plane: plane, referenceImage: imageAnchor.referenceImage.name)
       DispatchQueue.main.async {
-        self.addImageFromReferenceImage(plane: plane, referenceImage: imageAnchor.referenceImage.name)
+        self.addImageFromReferenceImage2(plane: plane, referenceImage: imageAnchor.referenceImage.name)
       }
 
       let planeNode = SCNNode(geometry: plane)
@@ -176,6 +176,42 @@ class ImageTrackingViewController: UIViewController, ARSCNViewDelegate
       plane.firstMaterial?.diffuse.contents = self.isaVideoPlayer
       self.isaVideoPlayer.play()
       self.isaVideoPlayer.isMuted = true
+    }
+  }
+
+  private func addImageFromReferenceImage2(plane: SCNPlane, referenceImage: String?)
+  {
+    if referenceImage == "ho_id"
+    {
+      let img = UIImage(named: "HoSlide")
+      let imgView = UIImageView(image: img)
+      imgView.contentMode = .scaleAspectFit
+
+      plane.firstMaterial?.diffuse.contents = imgView
+    }
+    else if referenceImage == "sky_id"
+    {
+      let img = UIImage(named: "SkySlide")
+      let imgView = UIImageView(image: img)
+      imgView.contentMode = .center
+
+      plane.firstMaterial?.diffuse.contents = imgView
+    }
+    else if referenceImage == "pirelli_id"
+    {
+      let img = UIImage(named: "PirelliSlide")
+      let imgView = UIImageView(image: img)
+      imgView.contentMode = .scaleAspectFit
+
+      plane.firstMaterial?.diffuse.contents = imgView
+    }
+    else if referenceImage == "enel_x_id"
+    {
+      let img = UIImage(named: "EnelXSlide")
+      let imgView = UIImageView(image: img)
+      imgView.contentMode = .scaleAspectFit
+
+      plane.firstMaterial?.diffuse.contents = imgView
     }
   }
 
