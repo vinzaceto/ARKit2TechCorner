@@ -84,31 +84,16 @@ class ARObjectTrackingViewController: UIViewController, ARSCNViewDelegate
     let node = SCNNode()
     if let objAnchor = anchor as? ARObjectAnchor
     {
-      if objAnchor.referenceObject.name == "StarkMoleskine"
-      {
-        // Create a plane
-        let plane = SCNPlane(width: 0.2,
-                             height: 0.5)
-        
-        plane.firstMaterial?.diffuse.contents = self.fightClubVideoPlayer
-        fightClubVideoPlayer.play()
-        fightClubVideoPlayer.volume = 0.4
-        
-        let planeNode = SCNNode(geometry: plane)
-        
-        // Rotate the plane to match the anchor
-        //planeNode.eulerAngles.x = -.pi / 2
-        
-        planeNode.position = SCNVector3(planeNode.position.x, planeNode.position.y + 0.3, planeNode.position.z )
-        
-        // Add plane node to parent
-        node.addChildNode(planeNode)
-      }
-      else if objAnchor.referenceObject.name == "M_scan"
+      if objAnchor.referenceObject.name == "M_scan" || objAnchor.referenceObject.name == "StarkMoleskine"
       {
         let lettersScene = SCNScene(named: "art.scnassets/TextDemo.scn")!
-        let textNode = lettersScene.rootNode.childNode(withName: "example_text", recursively: true)!
+        let textNode = lettersScene.rootNode.childNode(withName: "m_root_node", recursively: true)!
         node.addChildNode(textNode)
+
+        textNode.position = SCNVector3(textNode.position.x + 4, textNode.position.y, textNode.position.z)
+
+        //addTiltAndRotateAnimation(node: textNode)
+        addMoveLeftAnimation(node: textNode, distance: -4)
       }
       
       print("Anchor name is \(objAnchor.referenceObject.name ?? "not available")")  
@@ -143,5 +128,42 @@ class ARObjectTrackingViewController: UIViewController, ARSCNViewDelegate
       //node.addChildNode(self.model)
       print("Object detected! \(objectAnchor.description)")
     }
+  }
+
+  private func insertFightClubVideo(node: SCNNode)
+  {
+    let plane = SCNPlane(width: 0.2,
+                         height: 0.5)
+
+    plane.firstMaterial?.diffuse.contents = self.fightClubVideoPlayer
+    fightClubVideoPlayer.play()
+    fightClubVideoPlayer.volume = 0.4
+
+    let planeNode = SCNNode(geometry: plane)
+
+    // Rotate the plane to match the anchor
+    //planeNode.eulerAngles.x = -.pi / 2
+
+    planeNode.position = SCNVector3(planeNode.position.x, planeNode.position.y + 0.3, planeNode.position.z )
+
+    // Add plane node to parent
+    node.addChildNode(planeNode)
+  }
+
+  func addTiltAndRotateAnimation(node: SCNNode)
+  {
+    let rotateOne = SCNAction.rotateBy(x: 0, y: CGFloat(Float.pi), z: 0, duration: 5.0)
+    let hoverUp = SCNAction.moveBy(x: 0, y: 0.2, z: 0, duration: 2.5)
+    let hoverDown = SCNAction.moveBy(x: 0, y: -0.2, z: 0, duration: 2.5)
+    let hoverSequence = SCNAction.sequence([hoverUp, hoverDown])
+    let rotateAndHover = SCNAction.group([rotateOne, hoverSequence])
+    let repeatForever = SCNAction.repeatForever(rotateAndHover)
+    node.runAction(repeatForever)
+  }
+
+  func addMoveLeftAnimation(node: SCNNode, distance: CGFloat)
+  {
+    let moveLeft = SCNAction.moveBy(x: distance, y: 0, z: 0, duration: 8)
+    node.runAction(moveLeft)
   }
 }
