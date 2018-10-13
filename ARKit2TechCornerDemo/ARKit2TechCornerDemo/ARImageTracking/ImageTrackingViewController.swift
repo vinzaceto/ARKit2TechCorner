@@ -10,8 +10,8 @@ import UIKit
 import SceneKit
 import ARKit
 
-class ImageTrackingViewController: UIViewController, ARSCNViewDelegate {
-
+class ImageTrackingViewController: UIViewController, ARSCNViewDelegate
+{
   @IBOutlet var sceneView: ARSCNView!
   @IBOutlet weak var magicSwitch: UISwitch!
   @IBOutlet weak var blurView: UIVisualEffectView!
@@ -84,7 +84,8 @@ class ImageTrackingViewController: UIViewController, ARSCNViewDelegate {
     }
   }
 
-  override func viewDidAppear(_ animated: Bool) {
+  override func viewDidAppear(_ animated: Bool)
+  {
     super.viewDidAppear(animated)
 
     // Prevent the screen from being dimmed to avoid interuppting the AR experience.
@@ -94,9 +95,9 @@ class ImageTrackingViewController: UIViewController, ARSCNViewDelegate {
     resetTracking()
   }
 
-  override func viewWillDisappear(_ animated: Bool) {
+  override func viewWillDisappear(_ animated: Bool)
+  {
     super.viewWillDisappear(animated)
-
     session.pause()
   }
 
@@ -105,7 +106,8 @@ class ImageTrackingViewController: UIViewController, ARSCNViewDelegate {
   /// Prevents restarting the session while a restart is in progress.
   var isRestartAvailable = true
 
-  @IBAction func switchOnMagic(_ sender: Any) {
+  @IBAction func switchOnMagic(_ sender: Any)
+  {
     let configuration = ARImageTrackingConfiguration()
 
     guard let trackingImages = ARReferenceImage.referenceImages(inGroupNamed: "AR Resources", bundle: nil) else {
@@ -119,40 +121,24 @@ class ImageTrackingViewController: UIViewController, ARSCNViewDelegate {
     session.run(configuration, options: [.resetTracking, .removeExistingAnchors])
   }
 
-
   /// Creates a new AR configuration to run on the `session`.
   /// - Tag: ARReferenceImage-Loading
-  func resetTracking() {
-
+  func resetTracking()
+  {
     let configuration = ARImageTrackingConfiguration()
     session.run(configuration, options: [.resetTracking, .removeExistingAnchors])
   }
 
   // MARK: - Image Tracking Results
-
   public func renderer(_ renderer: SCNSceneRenderer, nodeFor anchor: ARAnchor) -> SCNNode? {
     let node = SCNNode()
 
-    // Show video overlaid on image
     if let imageAnchor = anchor as? ARImageAnchor {
 
-      // Create a plane
       let plane = SCNPlane(width: imageAnchor.referenceImage.physicalSize.width, height: imageAnchor.referenceImage.physicalSize.height)
-      if imageAnchor.referenceImage.name == "prague image" {
-        // Set AVPlayer as the plane's texture and play
-        plane.firstMaterial?.diffuse.contents = self.pragueVideoPlayer
-        self.pragueVideoPlayer.play()
-        self.pragueVideoPlayer.volume = 0.4
-      } else if imageAnchor.referenceImage.name == "fight club image" {
-        plane.firstMaterial?.diffuse.contents = self.fightClubVideoPlayer
-        self.fightClubVideoPlayer.play()
-      } else if imageAnchor.referenceImage.name == "homer image" {
-        plane.firstMaterial?.diffuse.contents = self.homerVideoPlayer
-        self.homerVideoPlayer.play()
-      } else {
-        plane.firstMaterial?.diffuse.contents = self.isaVideoPlayer
-        self.isaVideoPlayer.play()
-        self.isaVideoPlayer.isMuted = true
+      //addVideoFromReferenceImage(plane: plane, referenceImage: imageAnchor.referenceImage.name)
+      DispatchQueue.main.async {
+        self.addImageFromReferenceImage(plane: plane, referenceImage: imageAnchor.referenceImage.name)
       }
 
       let planeNode = SCNNode(geometry: plane)
@@ -167,5 +153,65 @@ class ImageTrackingViewController: UIViewController, ARSCNViewDelegate {
     }
 
     return node
+  }
+
+  private func addVideoFromReferenceImage(plane: SCNPlane, referenceImage: String?)
+  {
+    if referenceImage == "prague image"
+    {
+      // Set AVPlayer as the plane's texture and play
+      plane.firstMaterial?.diffuse.contents = self.pragueVideoPlayer
+      self.pragueVideoPlayer.play()
+      self.pragueVideoPlayer.volume = 0.4
+    } else if referenceImage == "fight club image"
+    {
+      plane.firstMaterial?.diffuse.contents = self.fightClubVideoPlayer
+      self.fightClubVideoPlayer.play()
+    } else if referenceImage == "homer image"
+    {
+      plane.firstMaterial?.diffuse.contents = self.homerVideoPlayer
+      self.homerVideoPlayer.play()
+    } else
+    {
+      plane.firstMaterial?.diffuse.contents = self.isaVideoPlayer
+      self.isaVideoPlayer.play()
+      self.isaVideoPlayer.isMuted = true
+    }
+  }
+
+  private func addImageFromReferenceImage(plane: SCNPlane, referenceImage: String?)
+  {
+    if referenceImage == "prague image"
+    {
+      let img = UIImage(named: "HoSlide")
+      let imgView = UIImageView(image: img)
+      imgView.contentMode = .scaleAspectFit
+
+      plane.firstMaterial?.diffuse.contents = imgView
+    }
+    else if referenceImage == "fight club image"
+    {
+      let img = UIImage(named: "SkySlide")
+      let imgView = UIImageView(image: img)
+      imgView.contentMode = .center
+
+      plane.firstMaterial?.diffuse.contents = imgView
+    }
+    else if referenceImage == "homer image"
+    {
+      let img = UIImage(named: "PirelliSlide")
+      let imgView = UIImageView(image: img)
+      imgView.contentMode = .scaleAspectFit
+
+      plane.firstMaterial?.diffuse.contents = imgView
+    }
+    else
+    {
+      let img = UIImage(named: "EnelXSlide")
+      let imgView = UIImageView(image: img)
+      imgView.contentMode = .scaleAspectFit
+
+      plane.firstMaterial?.diffuse.contents = imgView
+    }
   }
 }

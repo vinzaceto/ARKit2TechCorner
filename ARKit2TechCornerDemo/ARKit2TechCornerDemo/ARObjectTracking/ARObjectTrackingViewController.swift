@@ -60,6 +60,7 @@ class ARObjectTrackingViewController: UIViewController, ARSCNViewDelegate
     guard let referenceObjects = ARReferenceObject.referenceObjects(inGroupNamed: "AR Resources Objects", bundle: nil) else {
       fatalError("Missing expected asset catalog resources.")
     }
+    configuration.isLightEstimationEnabled = true;
     configuration.detectionObjects = referenceObjects
 
     // Run the view's session
