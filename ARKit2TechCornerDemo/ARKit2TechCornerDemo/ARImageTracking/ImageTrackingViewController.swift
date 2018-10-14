@@ -135,7 +135,8 @@ class ImageTrackingViewController: UIViewController, ARSCNViewDelegate
 
     if let imageAnchor = anchor as? ARImageAnchor {
 
-      let plane = SCNPlane(width: imageAnchor.referenceImage.physicalSize.width, height: imageAnchor.referenceImage.physicalSize.height)
+      // let plane = SCNPlane(width: imageAnchor.referenceImage.physicalSize.width, height: imageAnchor.referenceImage.physicalSize.height)
+      let plane = SCNPlane(width: 25, height: 14)
       //addVideoFromReferenceImage(plane: plane, referenceImage: imageAnchor.referenceImage.name)
       DispatchQueue.main.async {
         self.addImageFromReferenceImage2(plane: plane, referenceImage: imageAnchor.referenceImage.name)
@@ -146,7 +147,7 @@ class ImageTrackingViewController: UIViewController, ARSCNViewDelegate
       // Rotate the plane to match the anchor
       planeNode.eulerAngles.x = -.pi / 2
 
-      //planeNode.position = SCNVector3(planeNode.position.x - 10, planeNode.position.y, planeNode.position.z)
+      planeNode.position = SCNVector3(planeNode.position.x + 20, planeNode.position.y, planeNode.position.z)
 
       // Add plane node to parent
       node.addChildNode(planeNode)
@@ -197,7 +198,7 @@ class ImageTrackingViewController: UIViewController, ARSCNViewDelegate
 
       plane.firstMaterial?.diffuse.contents = imgView
     }
-    else if referenceImage == "pirelli_id"
+    else if referenceImage == "pirelli_id" || referenceImage == "pirelli_id_old"
     {
       let img = UIImage(named: "PirelliSlide")
       let imgView = UIImageView(image: img)
