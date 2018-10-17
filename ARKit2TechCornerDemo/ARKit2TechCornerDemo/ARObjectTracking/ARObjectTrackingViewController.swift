@@ -82,18 +82,38 @@ class ARObjectTrackingViewController: UIViewController, ARSCNViewDelegate
   func renderer(_ renderer: SCNSceneRenderer, nodeFor anchor: ARAnchor) -> SCNNode?
   {
     let node = SCNNode()
+    let letterOffset: Float = 0.1
+    let hideOffset: Float = 4.0
+    let absoluteOffset: Float = -0.6
     if let objAnchor = anchor as? ARObjectAnchor
     {
       if objAnchor.referenceObject.name == "M_scan" || objAnchor.referenceObject.name == "StarkMoleskine"
       {
         let lettersScene = SCNScene(named: "art.scnassets/TextDemo.scn")!
-        let textNode = lettersScene.rootNode.childNode(withName: "m_root_node", recursively: true)!
-        node.addChildNode(textNode)
 
-        textNode.position = SCNVector3(textNode.position.x + 4, textNode.position.y, textNode.position.z)
+        let m_text_node = lettersScene.rootNode.childNode(withName: "m_root_node", recursively: true)!
+        node.addChildNode(m_text_node)
+        m_text_node.position = SCNVector3(m_text_node.position.x + hideOffset + absoluteOffset, m_text_node.position.y, m_text_node.position.z)
+        addMoveLeftAnimation(node: m_text_node, distance: -CGFloat(hideOffset), delay: 0.0)
 
-        //addTiltAndRotateAnimation(node: textNode)
-        addMoveLeftAnimation(node: textNode, distance: -4)
+        let c_text_node = lettersScene.rootNode.childNode(withName: "c_root_node", recursively: true)!
+        let m_width = getNodeWidth(m_text_node) ?? 0.0
+        let c_width = getNodeWidth(c_text_node) ?? 0.0
+        node.addChildNode(c_text_node)
+
+        c_text_node.position = SCNVector3(c_text_node.position.x + letterOffset + hideOffset + m_width + absoluteOffset, c_text_node.position.y, c_text_node.position.z)
+        addMoveLeftAnimation(node: c_text_node, distance: -CGFloat(hideOffset), delay: 5.0)
+
+        let and_text_node = lettersScene.rootNode.childNode(withName: "and_root_node", recursively: true)!
+        let and_width = getNodeWidth(and_text_node) ?? 0.0
+        node.addChildNode(and_text_node)
+        and_text_node.position = SCNVector3(and_text_node.position.x + letterOffset * 2 + hideOffset + m_width + c_width + absoluteOffset, and_text_node.position.y, and_text_node.position.z)
+        addMoveLeftAnimation(node: and_text_node, distance: -CGFloat(hideOffset), delay: 8)
+
+        let t_text_node = lettersScene.rootNode.childNode(withName: "t_root_node", recursively: true)!
+        node.addChildNode(t_text_node)
+        t_text_node.position = SCNVector3(t_text_node.position.x + letterOffset * 3 + hideOffset + m_width + c_width + and_width + absoluteOffset, t_text_node.position.y, t_text_node.position.z)
+        addMoveLeftAnimation(node: t_text_node, distance: -CGFloat(hideOffset), delay: 10)
       }
       
       print("Anchor name is \(objAnchor.referenceObject.name ?? "not available")")  
@@ -161,9 +181,21 @@ class ARObjectTrackingViewController: UIViewController, ARSCNViewDelegate
     node.runAction(repeatForever)
   }
 
-  func addMoveLeftAnimation(node: SCNNode, distance: CGFloat)
+  func addMoveLeftAnimation(node: SCNNode, distance: CGFloat, delay: TimeInterval)
   {
     let moveLeft = SCNAction.moveBy(x: distance, y: 0, z: 0, duration: 8)
-    node.runAction(moveLeft)
+    let delayAction = SCNAction.wait(duration: delay)
+    let sequence = SCNAction.sequence([delayAction, moveLeft])
+    node.runAction(sequence)
+  }
+
+  private func getNodeWidth(_ node: SCNNode) -> Float?
+  {
+    let min = node.boundingBox.min
+    let max = node.boundingBox.max
+    let w = CGFloat(max.x - min.x)
+    //let h = CGFloat(max.y - min.y)
+    //let l =  CGFloat( max.z - min.z)
+    return Float(w)
   }
 }
