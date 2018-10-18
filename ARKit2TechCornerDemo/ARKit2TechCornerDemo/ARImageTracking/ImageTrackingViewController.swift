@@ -101,6 +101,22 @@ class ImageTrackingViewController: UIViewController, ARSCNViewDelegate
     session.pause()
   }
 
+  override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?)
+  {
+    DispatchQueue.main.async {
+      if let touchLocation = touches.first?.location(in: self.sceneView)
+      {
+        if let hit = self.sceneView.hitTest(touchLocation, options: nil).first
+        {
+          if hit.node.name == "forst_id"
+          {
+            UIApplication.shared.open(URL(string: "https://www.forst.it")!)
+          }
+        }
+      }
+    }
+  }
+
   // MARK: - Session management (Image detection setup)
 
   /// Prevents restarting the session while a restart is in progress.
@@ -143,11 +159,12 @@ class ImageTrackingViewController: UIViewController, ARSCNViewDelegate
       }
 
       let planeNode = SCNNode(geometry: plane)
+      planeNode.name = imageAnchor.referenceImage.name
 
       // Rotate the plane to match the anchor
       planeNode.eulerAngles.x = -.pi / 2
 
-      planeNode.position = SCNVector3(planeNode.position.x + 20, planeNode.position.y, planeNode.position.z)
+      planeNode.position = SCNVector3(planeNode.position.x + 18, planeNode.position.y, planeNode.position.z)
 
       // Add plane node to parent
       node.addChildNode(planeNode)
@@ -209,6 +226,14 @@ class ImageTrackingViewController: UIViewController, ARSCNViewDelegate
     else if referenceImage == "enel_x_id"
     {
       let img = UIImage(named: "EnelXSlide")
+      let imgView = UIImageView(image: img)
+      imgView.contentMode = .scaleAspectFit
+
+      plane.firstMaterial?.diffuse.contents = imgView
+    }
+    else if referenceImage == "forst_id"
+    {
+      let img = UIImage(named: "ForstSite")
       let imgView = UIImageView(image: img)
       imgView.contentMode = .scaleAspectFit
 
