@@ -98,23 +98,23 @@ class ARObjectTrackingViewController: UIViewController, ARSCNViewDelegate
         //addTranslateAnimation(node: m_text_node, distanceX: -CGFloat(hideOffset), distanceY: 0.0, distanceZ: 0.0, delay: 0.0) this
         addTranslateAnimation(node: m_text_node, distanceX: CGFloat(hideOffset), distanceY: 0.0, distanceZ: 0.0, delay: 0.0)
 
-        let c_text_node = lettersScene.rootNode.childNode(withName: "c_root_node", recursively: true)!
-        let m_width = getNodeWidth(m_text_node) ?? 0.0
-        let c_width = getNodeWidth(c_text_node) ?? 0.0
-        node.addChildNode(c_text_node)
-
-        c_text_node.position = SCNVector3(c_text_node.position.x + letterOffset + m_width + absoluteOffset, c_text_node.position.y, c_text_node.position.z + hideOffset + absoluteZOffset)
-        //addTranslateAnimation(node: c_text_node, distanceX: -CGFloat(hideOffset), distanceY: 0.0, distanceZ: 0.0, delay: 5.0)
-        addTranslateAnimation(node: c_text_node, distanceX: 0.0, distanceY: 0.0, distanceZ: -CGFloat(hideOffset), delay: 4.0)
-
         let and_text_node = lettersScene.rootNode.childNode(withName: "and_root_node", recursively: true)!
+        let m_width = getNodeWidth(m_text_node) ?? 0.0
         let and_width = getNodeWidth(and_text_node) ?? 0.0
         node.addChildNode(and_text_node)
-        and_text_node.position = SCNVector3(and_text_node.position.x + letterOffset * 2 + m_width + c_width + absoluteOffset, and_text_node.position.y + hideOffset, and_text_node.position.z + absoluteZOffset)
-        //and_text_node.rotation = SCNVector4(1.0, 0.0, 0.0, Float.pi)
-        //addTranslateAnimation(node: and_text_node, distanceX: -CGFloat(hideOffset), distanceY: 0.0, distanceZ: 0.0, delay: 8)
-        addTranslateAnimation(node: and_text_node, distanceX: 0.0, distanceY: -CGFloat(hideOffset), distanceZ: 0.0, delay: 6)
-        //addTranslateAndRotateAnimation(node: and_text_node, distanceX: 0.0, distanceY: -CGFloat(hideOffset), distanceZ: 0.0, rotation: -CGFloat(Float.pi), delay: 8)
+
+        and_text_node.position = SCNVector3(and_text_node.position.x + letterOffset + m_width + absoluteOffset, and_text_node.position.y, and_text_node.position.z + hideOffset + absoluteZOffset)
+        //addTranslateAnimation(node: and_text_node, distanceX: -CGFloat(hideOffset), distanceY: 0.0, distanceZ: 0.0, delay: 5.0)
+        addTranslateAnimation(node: and_text_node, distanceX: 0.0, distanceY: 0.0, distanceZ: -CGFloat(hideOffset), delay: 4.0)
+
+        let c_text_node = lettersScene.rootNode.childNode(withName: "c_root_node", recursively: true)!
+        let c_width = getNodeWidth(c_text_node) ?? 0.0
+        node.addChildNode(c_text_node)
+        c_text_node.position = SCNVector3(c_text_node.position.x + letterOffset * 2 + m_width + c_width + absoluteOffset, c_text_node.position.y + hideOffset, c_text_node.position.z + absoluteZOffset)
+        //c_text_node.rotation = SCNVector4(1.0, 0.0, 0.0, Float.pi)
+        //addTranslateAnimation(node: c_text_node, distanceX: -CGFloat(hideOffset), distanceY: 0.0, distanceZ: 0.0, delay: 8)
+        addTranslateAnimation(node: c_text_node, distanceX: 0.0, distanceY: -CGFloat(hideOffset), distanceZ: 0.0, delay: 6)
+        //addTranslateAndRotateAnimation(node: c_text_node, distanceX: 0.0, distanceY: -CGFloat(hideOffset), distanceZ: 0.0, rotation: -CGFloat(Float.pi), delay: 8)
 
         let t_text_node = lettersScene.rootNode.childNode(withName: "t_root_node", recursively: true)!
         node.addChildNode(t_text_node)
