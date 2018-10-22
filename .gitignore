@@ -66,3 +66,5 @@ fastlane/report.xml
 fastlane/Preview.html
 fastlane/screenshots/**/*.png
 fastlane/test_output
+
+ARKit2TechCornerDemo/ARKit2TechCornerDemo/Assets\.xcassets/AR Resources\.arresourcegroup/\.DS_Store
