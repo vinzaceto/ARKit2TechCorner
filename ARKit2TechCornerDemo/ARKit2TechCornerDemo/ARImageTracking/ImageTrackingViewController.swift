@@ -16,45 +16,6 @@ class ImageTrackingViewController: UIViewController, ARSCNViewDelegate
   @IBOutlet weak var magicSwitch: UISwitch!
   @IBOutlet weak var blurView: UIVisualEffectView!
 
-  // Create video player
-  let isaVideoPlayer: AVPlayer = {
-    //load Isa video from bundle
-    guard let url = Bundle.main.url(forResource: "isa video", withExtension: "mp4", subdirectory: "art.scnassets") else {
-      print("Could not find video file")
-      return AVPlayer()
-    }
-
-    return AVPlayer(url: url)
-  }()
-  let pragueVideoPlayer: AVPlayer = {
-    //load Prague video from bundle
-    guard let url = Bundle.main.url(forResource: "prague video", withExtension: "mp4", subdirectory: "art.scnassets") else {
-      print("Could not find video file")
-      return AVPlayer()
-    }
-
-    return AVPlayer(url: url)
-  }()
-  let fightClubVideoPlayer: AVPlayer = {
-    //load Prague video from bundle
-    guard let url = Bundle.main.url(forResource: "fight club video", withExtension: "mov", subdirectory: "art.scnassets") else {
-      print("Could not find video file")
-      return AVPlayer()
-    }
-
-    return AVPlayer(url: url)
-  }()
-  let homerVideoPlayer: AVPlayer = {
-    //load Prague video from bundle
-    guard let url = Bundle.main.url(forResource: "homer video", withExtension: "mov", subdirectory: "art.scnassets") else {
-      print("Could not find video file")
-      return AVPlayer()
-    }
-
-    return AVPlayer(url: url)
-  }()
-
-
   /// The view controller that displays the status and "restart experience" UI.
   lazy var statusViewController: StatusViewController = {
     return children.lazy.compactMap({ $0 as? StatusViewController }).first!
@@ -153,7 +114,6 @@ class ImageTrackingViewController: UIViewController, ARSCNViewDelegate
 
       // let plane = SCNPlane(width: imageAnchor.referenceImage.physicalSize.width, height: imageAnchor.referenceImage.physicalSize.height)
       let plane = SCNPlane(width: 25, height: 14)
-      //addVideoFromReferenceImage(plane: plane, referenceImage: imageAnchor.referenceImage.name)
       DispatchQueue.main.async {
         self.addImageFromReferenceImage2(plane: plane, referenceImage: imageAnchor.referenceImage.name)
       }
@@ -171,30 +131,6 @@ class ImageTrackingViewController: UIViewController, ARSCNViewDelegate
     }
 
     return node
-  }
-
-  private func addVideoFromReferenceImage(plane: SCNPlane, referenceImage: String?)
-  {
-    if referenceImage == "prague image"
-    {
-      // Set AVPlayer as the plane's texture and play
-      plane.firstMaterial?.diffuse.contents = self.pragueVideoPlayer
-      self.pragueVideoPlayer.play()
-      self.pragueVideoPlayer.volume = 0.4
-    } else if referenceImage == "fight club image"
-    {
-      plane.firstMaterial?.diffuse.contents = self.fightClubVideoPlayer
-      self.fightClubVideoPlayer.play()
-    } else if referenceImage == "homer image"
-    {
-      plane.firstMaterial?.diffuse.contents = self.homerVideoPlayer
-      self.homerVideoPlayer.play()
-    } else
-    {
-      plane.firstMaterial?.diffuse.contents = self.isaVideoPlayer
-      self.isaVideoPlayer.play()
-      self.isaVideoPlayer.isMuted = true
-    }
   }
 
   private func addImageFromReferenceImage2(plane: SCNPlane, referenceImage: String?)
